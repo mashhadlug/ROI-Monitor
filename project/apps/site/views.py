@@ -6,6 +6,7 @@ from flask import Blueprint, abort, request, current_app, flash, session, g, red
 from flask.ext.babel import lazy_gettext as _
 
 #project import
+import models
 
 mod = Blueprint('site', __name__, url_prefix='/')
 
