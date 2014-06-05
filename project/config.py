@@ -15,6 +15,7 @@ class DefaultConfig(object):
     # Blueprint haye nasb shode dar app bayad be in list ezafe beshan
     INSTALLED_BLUEPRINTS = (
         'site',
+        'sensors',
         'rest',
     )
 

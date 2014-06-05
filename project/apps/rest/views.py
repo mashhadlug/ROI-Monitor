@@ -6,7 +6,7 @@ from flask import Blueprint, abort, request, current_app, flash, session, g, red
 from flask.ext.babel import lazy_gettext as _
 
 #project import
-from project.apps.site.models import Sensor
+from project.apps.sensors.models import Sensor
 
 mod = Blueprint('api', __name__, url_prefix='/api/v1')
 
@@ -40,4 +40,3 @@ def rest_sensors():
 		sensors.append(tmp)
 
 	return jsonify(sensors=sensors)
-
