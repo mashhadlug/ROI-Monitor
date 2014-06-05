@@ -9,10 +9,16 @@
         <li><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><i class="fa fa-table"></i> Sensors</li>
       </ol>
-      <!--<div class="alert alert-info alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        We're using <a class="alert-link" href="http://tablesorter.com/docs/">Tablesorter 2.0</a> for the sort function on the tables. Read the documentation for more customization options or feel free to use something else!
-      </div>-->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{ message }}
+              </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
   </div><!-- /.row -->
 
@@ -49,6 +55,7 @@
             <tr>
               <th>Row <i class="fa fa-sort"></i></th>
               <th>Name <i class="fa fa-sort"></i></th>
+              <th>Pin Number <i class="fa fa-sort"></i></th>
               <th>Status <i class="fa fa-sort"></i></th>
               <th>Created <i class="fa fa-sort"></i></th>
               <th>Modified <i class="fa fa-sort"></i></th>
@@ -56,12 +63,14 @@
             </tr>
           </thead>
           <tbody>
-            {% for i in [1,2,3,4,5,6] %}
+            {% for sensor in sensors %}
             <tr>
-                <td>{{ loop.index }}</td>
-                {% for field in ['WC', 'ON', '3min ago', '2min ago'] %}
-                <td>{{ field }}</td>
-                {% endfor %}
+                <td>{{ sensor.id }}</td>
+                <td>{{ sensor.name }}</td>
+                <td>{{ sensor.pin }}</td>
+                <td>STATUS</td>
+                <td>{{ sensor.created_at }}</td>
+                <td>{{ sensor.modified_at }}</td>
                 <td>
                   <button class="btn btn-link" data-toggle="modal" data-target="#sensorModal{{ loop.index }}">
                     <i class="fa fa-edit"></i> edit
@@ -69,7 +78,7 @@
 
                   <!-- Modal -->
                   <div class="modal fade" id="sensorModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <form role="form" method="POST" action="/sesnsors/{{ loop.index }}">
+                    <form role="form" method="POST" action="{{ url_for('sensors.update', id=sensor.id) }}">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -79,11 +88,11 @@
                           <div class="modal-body">
                               <div class="form-group">
                                 {{ form.name.label }}
-                                {{ form.name(value="WC", size=20, class="form-control", placeholder="Sensor's Name") }}
+                                {{ form.name(value=sensor.name, size=20, class="form-control", placeholder="Sensor's Name") }}
                               </div>
                               <div class="form-group">
                                 {{ form.pin.label }}
-                                {{ form.pin(value="0", size=2, class="form-control", placeholder="Sensor's Pin") }}
+                                {{ form.pin(value=sensor.pin, size=2, class="form-control", placeholder="Sensor's Pin") }}
                               </div>
                               <div class="form-group">
                                 {{ form.csrf_token }}
