@@ -7,7 +7,7 @@ from flask.ext.babel import lazy_gettext as _
 from sqlalchemy import desc
 
 #project import
-from models import Sensor
+from models import Sensor, Log
 from forms import SensorForm
 from project.database import db_session
 
@@ -49,3 +49,23 @@ def update(id):
     flash(u'successfully updated the sensor', 'success')
     
     return redirect("/sensors")
+
+# FIXME: do it as REST does you idiot!
+@mod.route('/<id>/delete', methods=['GET'])
+def delete(id):
+    # TODO: check if sensor exists
+    # TODO: add form vlidation
+    sensor = Sensor.query.filter(Sensor.id == id).first()
+    
+    db_session.delete(sensor)
+    db_session.commit()
+    flash(u'successfully deleted the sensor', 'success')
+    
+    return redirect("/sensors")
+
+@mod.route('/<id>/history', methods=['GET'])
+def history(id):
+    # TODO: check if sensor exists
+    # TODO: add form vlidation
+    logs = Log.query.filter(Log.sensor_id == id).all()
+    return render_template("/sensors/sensor.html", logs=logs)

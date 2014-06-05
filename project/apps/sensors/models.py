@@ -1,5 +1,10 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from project.database import Base
+from project.database import db_session
+
+# FIXME: move to extensions
+from flask.ext.sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
 class Sensor(Base):
     __tablename__ = 'sensors'
@@ -20,7 +25,7 @@ class Sensor(Base):
         self.pin = pin
 
 class Log(Base):
-    __tablename__ = 'status_log'
+    __tablename__ = 'logs'
     id = Column(Integer, primary_key=True)
     sensor_id = Column(Integer)
     created_at = Column(DateTime)
