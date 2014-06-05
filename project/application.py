@@ -11,7 +11,6 @@ from flask.ext.babel import gettext as _
 
 #from project
 from project.config import DefaultConfig as base_config
-from project.utils.issue import import_cart_to_list
 
 __all__ = ['create_app', 'create_simple_app']
 
@@ -88,22 +87,22 @@ def configure_errorhandlers(app):
 
     @app.errorhandler(404)
     def page_not_found(error):
-        import_cart_to_list(error)
+        # import_cart_to_list(error)
         return ('Sorry, page not found'), 404
 
     @app.errorhandler(403)
     def forbidden(error):
-        import_cart_to_list(error)
+        # import_cart_to_list(error)
         return ('Sorry, not allowed'), 403
 
     @app.errorhandler(500)
     def server_error(error):
-        import_cart_to_list(error)
+        # import_cart_to_list(error)
         return ('Sorry, an error has occurred'), 500
 
     @app.errorhandler(401)
     def unauthorized(error):
-        import_cart_to_list(error)
+        # import_cart_to_list(error)
         return ("Login required") , 401
 
 
