@@ -5,7 +5,6 @@ import re
 from flask import Blueprint, abort, request, current_app, flash, session, g, redirect, url_for, send_from_directory, make_response, jsonify, render_template
 from flask.ext.babel import lazy_gettext as _
 
-#project import
 
 mod = Blueprint('site', __name__, url_prefix='/')
 
@@ -16,6 +15,6 @@ def index():
 @mod.route('about/')
 def about():
     """
-    show profile
+    show Sensor
     """
     return "<center><h1>IRAN‌ PYTHON</h1></center>"

@@ -16,6 +16,7 @@ class DefaultConfig(object):
     INSTALLED_BLUEPRINTS = (
         'site',
         'sensors',
+        'rest',
     )
 
 class DeploymentConfig(DefaultConfig):
