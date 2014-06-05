@@ -9,16 +9,17 @@ from wtforms.validators import Required, Length, Regexp, Email, optional, EqualT
 # from flask
 from flask import g
 from flask.ext.wtf import Form
+from flaskext.babel import lazy_gettext as _
 
 # from friendfile
 # from friendfile.models import Entity
 
 
 class SensorForm(Form):
-    name = TextField(_('Sensor\'s Name'),
-                            [Required(message=_('The name is required'))])
-    pin = TextField(_('Sensor\'s Pin Number'),
-                            [Required(message=_('a valid PIN number for the sensor is required'))])
+    name = TextField('Sensor\'s Name',
+                            [Required(message='The name is required')])
+    pin = TextField('Sensor\'s Pin Number',
+                            [Required(message='a valid PIN number for the sensor is required')])
     def __init__(self, *args, **kwargs):
         Form.__init__(self, *args, **kwargs)
 
