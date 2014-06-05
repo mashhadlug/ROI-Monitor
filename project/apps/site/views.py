@@ -6,7 +6,7 @@ from flask import Blueprint, abort, request, current_app, flash, session, g, red
 from flask.ext.babel import lazy_gettext as _
 
 #project import
-import models
+from models import Sensor
 
 mod = Blueprint('site', __name__, url_prefix='/')
 
@@ -17,6 +17,7 @@ def index():
 @mod.route('about/')
 def about():
     """
-    show profile
+    show Sensor
     """
     return "<center><h1>IRAN‌ PYTHON</h1></center>"
+

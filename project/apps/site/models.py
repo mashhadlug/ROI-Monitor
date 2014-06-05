@@ -16,6 +16,3 @@ class Sensor(Base):
         self.created_by = created_by
         self.modified_at = modify_at
         self.modified_by = modify_by
-
-    def __repr__(self):
-        return '<Sensor %r>' % (self.name)
