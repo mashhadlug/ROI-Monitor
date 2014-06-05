@@ -7,18 +7,17 @@ from flask.ext.babel import lazy_gettext as _
 
 #project import
 from models import Sensor
+from forms import SensorForm
 
 mod = Blueprint('sensors', __name__, url_prefix='/sensors')
 
 @mod.route('/')
 def index():
-    return render_template("/sensors/index.html")
-
-@mod.route('/test')
-def index():
-    return render_template("/sensors/index.html")
+    sensor_form = SensorForm()
+    print sensor_form
+    return render_template("/sensors/index.html", form=sensor_form)
 
 @mod.route('sensor/<id>')
 def rest_sensor(id):
     sensor_obj = Sensor.query.filter(Sensor.id == id).first()
-    return sensor_obj.name
+    return render_template("/sensors/sensor.html", sensor=sensor_obj)
