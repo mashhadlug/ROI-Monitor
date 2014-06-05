@@ -1,4 +1,5 @@
 #!/bin/bash
+python hackathon.py
 gunicorn --workers=3 --access-logfile='-' --error-logfile='-' --access-logformat='%(s)s %(b)s "%(f)s" %(t)s "%(r)s"' -t 60 -b 0.0.0.0:5000 develop:application
 
 # "127.0.0.1 - - [25/Aug/2013:14:15:48] "GET /statics/liquid/script/front/forms.js HTTP/1.1" 304 - "http://127.0.0.1:5000/store/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:20.0) Gecko/20100101 Firefox/20.0"
