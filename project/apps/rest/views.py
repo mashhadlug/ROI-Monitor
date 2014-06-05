@@ -21,6 +21,7 @@ def rest_sensor(id):
 			created_by = sensor_obj.created_by,
 			modified_at = sensor_obj.modified_at,
 			modified_by = sensor_obj.modified_by,
+			pin = sensor_obj.pin,
 			)
 
 @mod.route('/sensors/')
@@ -35,6 +36,7 @@ def rest_sensors():
 		tmp['created_by'] = item.created_by
 		tmp['modified_at'] = item.modified_at
 		tmp['modified_by'] = item.modified_by
+		tmp['pin'] = item.pin
 		sensors.append(tmp)
 
 	return jsonify(sensors=sensors)

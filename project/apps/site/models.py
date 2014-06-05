@@ -9,10 +9,12 @@ class Sensor(Base):
     created_by = Column(String(50))
     modified_at = Column(DateTime)
     modified_by = Column(String(50))
+    pin = Column(Integer)
 
-    def __init__(self, name=None, created_at=None, created_by=None, modified_at=None ,modified_by=None):
+    def __init__(self, name=None, created_at=None, created_by=None, modified_at=None ,modified_by=None, pin=None):
         self.name = name
         self.created_at = created_at
         self.created_by = created_by
         self.modified_at = modified_at
         self.modified_by = modified_by
+        self.pin = pin
