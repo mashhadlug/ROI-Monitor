@@ -6,6 +6,7 @@ from flask import Blueprint, abort, request, current_app, flash, session, g, red
 from flask.ext.babel import lazy_gettext as _
 
 #project import
+from models import Sensor
 
 mod = Blueprint('site', __name__, url_prefix='/')
 
@@ -16,6 +17,12 @@ def index():
 @mod.route('about/')
 def about():
     """
-    show profile
+    show Sensor
     """
     return "<center><h1>IRAN‌ PYTHON</h1></center>"
+
+@mod.route('sensor/<id>')
+def rest_sensor(id):
+	sensor_obj = Sensor.query.filter(Sensor.id == id).first()
+	return sensor_obj.name
+
