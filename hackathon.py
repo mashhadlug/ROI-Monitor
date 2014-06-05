@@ -3,22 +3,28 @@
 PINS = [dict(name="WC", file="/tmp/wc", pin="1")]
 
 import threading
+import datetime.datetime as dt
+from project.apps.sensors.models import Log, Sensor
 
 class Monitor(threading.Thread):
   """ Class doc """
   
-  def __init__ (self, name=None, pin=None):
+  def __init__ (self, name=None, pin=None, sensor_id=None):
     """ Class initialiser """
     threading.Thread.__init__(self)
     
-    if name is None or pin is None:
+    if name is None or pin is None or sensor_id is None:
       raise Exception("ValueError", "name and pin number is essenial")
     
     if not isinstance(pin, int):
       raise Exception("ValueError", "pin number ust be a number")
+
+    if not isinstance(sensor_id, int):
+      raise Exception("ValueError", "Sensor Is is not valid")
     
     self.name = name
     self.pin = pin
+    self.sensor_id = sensor_id
     self.device = "/tmp/%s" % pin
     self.current = None
   
@@ -28,7 +34,9 @@ class Monitor(threading.Thread):
       f = open(self.device, "r")
       value = f.read()
       if value != self.current:
-        # TODO: trigger specific event
+        log = Log(sensor_id=self.sensor_id, created_at=dt.now(), change_from=value, value=self.current)
+        db_session.add(log)
+        db_session.commit()
         self.current = value
         print "Changed:",  value
         f.close()
@@ -46,7 +54,9 @@ class Event:
     pass
 
 def command_line_runner():
-  mon = Monitor("WC", 1)
+  sensor_obj = Sensor.query.all()
+  for item in sensor_obj:
+    mon = Monitor(item.name, item.pin, item.id)
   mon.start()
 
 
