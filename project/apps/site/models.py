@@ -14,5 +14,5 @@ class Sensor(Base):
         self.name = name
         self.created_at = created_at
         self.created_by = created_by
-        self.modified_at = modify_at
-        self.modified_by = modify_by
+        self.modified_at = modified_at
+        self.modified_by = modified_by

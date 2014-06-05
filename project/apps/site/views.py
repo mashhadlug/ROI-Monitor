@@ -21,3 +21,8 @@ def about():
     """
     return "<center><h1>IRAN‌ PYTHON</h1></center>"
 
+@mod.route('sensor/<id>')
+def rest_sensor(id):
+	sensor_obj = Sensor.query.filter(Sensor.id == id).first()
+	return sensor_obj.name
+
