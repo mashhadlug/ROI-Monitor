@@ -78,4 +78,4 @@ def rest_senser_log(id):
 @mod.route('/sensor/status/<id>')
 def rest_status(id):
 	sensor_obj = Log.query.filter(Log.sensor_id == id).order_by(desc(Log.created_at)).first()
-	return jsonify(vlaue=sensor_obj.value)
+	return jsonify(value=sensor_obj.value)
