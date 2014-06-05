@@ -19,24 +19,24 @@
   
   <div class="row">
     <div class="col-lg-12">
-      <!--<h2>Bordered Table</h2>-->
+      <h2>{{ sensor.name }}<br><small>PIN NUMBER {{ sensor.pin }}</small></h2>
       <div class="table-responsive">
         <table class="table table-bordered table-hover tablesorter">
           <thead>
             <tr>
               <th>Row <i class="fa fa-sort"></i></th>
-              <th>Value <i class="fa fa-sort"></i></th>
-              <th>Created <i class="fa fa-sort"></i></th>
+              <th>Current Value <i class="fa fa-sort"></i></th>
               <th>Changed fro value <i class="fa fa-sort"></i></th>
+              <th>Created <i class="fa fa-sort"></i></th>
             </tr>
           </thead>
           <tbody>
-            {% for i in [1,2,3,4,5,6] %}
+            {% for log in sensor.logs %}
             <tr>
-                <td>{{ loop.index }}</td>
-                {% for field in ['WC', 'ON', '3min ago', '2min ago'] %}
-                <td>{{ field }}</td>
-                {% endfor %}
+                <td># {{ loop.index }}</td>
+                <td>{{ log.value }}</td>
+                <td>{{ log.change_from }}</td>
+                <td>{{ log.created_at }}</td>
             </tr>
             {% endfor %}
           </tbody>
