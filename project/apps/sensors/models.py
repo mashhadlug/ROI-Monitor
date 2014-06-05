@@ -27,11 +27,16 @@ class Sensor(Base):
 class Log(Base):
     __tablename__ = 'logs'
     id = Column(Integer, primary_key=True)
-    sensor_id = Column(Integer)
+    sensor_id = Column(Integer, db.ForeignKey('sensors.id'))
     created_at = Column(DateTime)
     change_from = Column(Integer)
     value = Column(Integer)
 
+    # Association
+    sensor = db.relationship('Sensor',
+      primaryjoin=(sensor_id==Sensor.id),
+      backref=db.backref('logs', lazy='dynamic'))
+    
     def __init__(self, sensor_id=None, created_at=None, change_from=None, value=None):
         self.sensor_id = sensor_id
         self.created_at = created_at

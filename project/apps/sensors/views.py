@@ -67,5 +67,6 @@ def delete(id):
 def history(id):
     # TODO: check if sensor exists
     # TODO: add form vlidation
-    logs = Log.query.filter(Log.sensor_id == id).all()
-    return render_template("/sensors/sensor.html", logs=logs)
+    sensor = Sensor.query.filter(Sensor.id == id).first()
+    
+    return render_template("/sensors/sensor.html", logs=logs, sensor=sensor)

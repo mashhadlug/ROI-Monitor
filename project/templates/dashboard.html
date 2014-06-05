@@ -22,7 +22,7 @@
   </div><!-- /.row -->
 
   <div class="row">
-    {% for i in [1,2,3,4] %}
+    {% for sensor in sensors %}
     <div class="col-lg-3">
       <div class="panel panel-info">
         <div class="panel-heading">
@@ -31,12 +31,18 @@
               <i class="fa  fa-bell-o fa-5x"></i>
             </div>
             <div class="col-xs-6 text-right">
-              <p class="announcement-heading">WC</p>
-              <p class="announcement-text">Last Status</p>
+              <p class="announcement-heading">{{ sensor.name }}</p>
+              <p class="announcement-text">
+                {% if sensor.logs.first() %}
+                  {{ sensor.logs.first().value }}
+                {% else %}
+                  unavailable
+                {% endif %}
+              </p>
             </div>
           </div>
         </div>
-        <a href="#">
+        <a href="{{ url_for('sensors.show', id=sensor.id) }}">
           <div class="panel-footer announcement-bottom">
             <div class="row">
               <div class="col-xs-6">
