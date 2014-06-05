@@ -33,6 +33,7 @@ def create_app(config=None, app_name=DEFAULT_APP_NAME):
     configure_app(app, config)
     configure_blueprints(app)
     configure_errorhandlers(app)
+    configure_template(app)
     return app
 
 
@@ -109,3 +110,10 @@ def configure_errorhandlers(app):
 def configure_before_handlers(app):
     pass
 
+
+def configure_template (app):
+  """ Function doc """
+  base_dir = os.path.dirname(os.path.abspath(__file__))
+  app.template_folder = base_dir + '/templates'
+  app.static_folder = base_dir + '/static'
+  print app.template_folder, app.static_folder
