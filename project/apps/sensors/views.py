@@ -20,4 +20,4 @@ def index():
 @mod.route('sensor/<id>')
 def rest_sensor(id):
     sensor_obj = Sensor.query.filter(Sensor.id == id).first()
-    return sensor_obj.name
+    return render_template("/sensors/sensor.html", sensor=sensor_obj)

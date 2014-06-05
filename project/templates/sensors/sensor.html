@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div id="page-wrapper">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Sensors <small>History Log</small></h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active"><a href="/sensors/"><i class="fa fa-table"></i> Sensors</a></li>
+        <li class="active"><i class="fa fa-table"></i> History</li>
+      </ol>
+      <!--<div class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        We're using <a class="alert-link" href="http://tablesorter.com/docs/">Tablesorter 2.0</a> for the sort function on the tables. Read the documentation for more customization options or feel free to use something else!
+      </div>-->
+    </div>
+  </div><!-- /.row -->
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <!--<h2>Bordered Table</h2>-->
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover tablesorter">
+          <thead>
+            <tr>
+              <th>Row <i class="fa fa-sort"></i></th>
+              <th>Value <i class="fa fa-sort"></i></th>
+              <th>Created <i class="fa fa-sort"></i></th>
+              <th>Changed fro value <i class="fa fa-sort"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in [1,2,3,4,5,6] %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                {% for field in ['WC', 'ON', '3min ago', '2min ago'] %}
+                <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+</div><!-- /#page-wrapper -->
+{% endblock %}
